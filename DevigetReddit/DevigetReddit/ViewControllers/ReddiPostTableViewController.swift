@@ -13,7 +13,8 @@ class ReddiPostTableViewController: UITableViewController {
     
     let redditService : RedditServiceProtocol = RedditService()
     var redditListing : RedditListing?
-    
+    public weak var postSelectiondelegate: PostSelectionDelegate?
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -77,6 +78,13 @@ class ReddiPostTableViewController: UITableViewController {
         return (tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath))
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let redditPost =  self.redditListing?.data.children[indexPath.row]{
+            postSelectiondelegate?.postSelected(redditPost)
+        }
+
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

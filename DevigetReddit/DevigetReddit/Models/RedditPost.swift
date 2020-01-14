@@ -8,12 +8,12 @@
 
 import UIKit
 
-struct RedditPost: Codable {
+public struct RedditPost: Codable {
     let data: RedditPostData
     
 }
 
-struct RedditPostData: Codable {
+public struct RedditPostData: Codable {
     let title: String
     let created : Int64
     let author : String

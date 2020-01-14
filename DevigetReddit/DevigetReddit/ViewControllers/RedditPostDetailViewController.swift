@@ -14,9 +14,17 @@ class RedditPostDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        descriptionLabel.text = "Hello, this text will change"
     }
     
 
 
+}
+extension RedditPostDetailViewController: PostSelectionDelegate {
+    func postSelected(_ post: RedditPost) {
+        
+        descriptionLabel.text = post.data.title
+        
+        //TODO: set image view
+    }
+    
 }
