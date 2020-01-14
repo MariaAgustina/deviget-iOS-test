@@ -24,6 +24,9 @@
 		9325BF9023CD5CE500D75C8C /* RedditServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9325BF8F23CD5CE500D75C8C /* RedditServiceProtocol.swift */; };
 		9325BF9323CD6CF400D75C8C /* ThumbnailService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9325BF9223CD6CF400D75C8C /* ThumbnailService.swift */; };
 		9325BF9623CD733200D75C8C /* PostSelectionDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9325BF9523CD733200D75C8C /* PostSelectionDelegate.swift */; };
+		9325BFAD23CE82AD00D75C8C /* MockRedditService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9325BFAC23CE82AD00D75C8C /* MockRedditService.swift */; };
+		9325BFAF23CE82DB00D75C8C /* RedditPostTableViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9325BFAE23CE82DB00D75C8C /* RedditPostTableViewControllerTests.swift */; };
+		9325BFB123CE82F200D75C8C /* RedditPostDetailViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9325BFB023CE82F200D75C8C /* RedditPostDetailViewControllerTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,6 +70,9 @@
 		9325BF8F23CD5CE500D75C8C /* RedditServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditServiceProtocol.swift; sourceTree = "<group>"; };
 		9325BF9223CD6CF400D75C8C /* ThumbnailService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbnailService.swift; sourceTree = "<group>"; };
 		9325BF9523CD733200D75C8C /* PostSelectionDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostSelectionDelegate.swift; sourceTree = "<group>"; };
+		9325BFAC23CE82AD00D75C8C /* MockRedditService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockRedditService.swift; sourceTree = "<group>"; };
+		9325BFAE23CE82DB00D75C8C /* RedditPostTableViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPostTableViewControllerTests.swift; sourceTree = "<group>"; };
+		9325BFB023CE82F200D75C8C /* RedditPostDetailViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RedditPostDetailViewControllerTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -137,6 +143,9 @@
 			isa = PBXGroup;
 			children = (
 				9325BF6423CD52BD00D75C8C /* DevigetRedditTests.swift */,
+				9325BFAE23CE82DB00D75C8C /* RedditPostTableViewControllerTests.swift */,
+				9325BFB023CE82F200D75C8C /* RedditPostDetailViewControllerTests.swift */,
+				9325BFAC23CE82AD00D75C8C /* MockRedditService.swift */,
 				9325BF6623CD52BD00D75C8C /* Info.plist */,
 			);
 			path = DevigetRedditTests;
@@ -354,6 +363,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				9325BF6523CD52BD00D75C8C /* DevigetRedditTests.swift in Sources */,
+				9325BFAF23CE82DB00D75C8C /* RedditPostTableViewControllerTests.swift in Sources */,
+				9325BFAD23CE82AD00D75C8C /* MockRedditService.swift in Sources */,
+				9325BFB123CE82F200D75C8C /* RedditPostDetailViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

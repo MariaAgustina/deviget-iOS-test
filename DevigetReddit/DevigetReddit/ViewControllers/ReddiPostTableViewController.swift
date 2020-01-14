@@ -11,7 +11,7 @@ import UIKit
 class ReddiPostTableViewController: UITableViewController {
 
     
-    let redditService : RedditServiceProtocol = RedditService()
+    var redditService : RedditServiceProtocol = RedditService()
     var redditListing : RedditListing?
     public weak var postSelectiondelegate: PostSelectionDelegate?
     var activityIndicator = UIActivityIndicatorView()
