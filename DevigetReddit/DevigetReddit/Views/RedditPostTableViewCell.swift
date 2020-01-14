@@ -15,6 +15,7 @@ class RedditPostTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var numberOfCommentsLabel: UILabel!
     @IBOutlet weak var postImageView: UIImageView!
+    @IBOutlet weak var dismissButton: UIButton!
     
     override func awakeFromNib() {
         super.awakeFromNib()

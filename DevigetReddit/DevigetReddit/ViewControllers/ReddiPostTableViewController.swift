@@ -14,19 +14,22 @@ class ReddiPostTableViewController: UITableViewController {
     var redditService : RedditServiceProtocol = RedditService()
     var redditListing : RedditListing?
     public weak var postSelectiondelegate: PostSelectionDelegate?
-    var activityIndicator = UIActivityIndicatorView()
+    var activityIndicator : UIActivityIndicatorView?
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50)) as UIActivityIndicatorView
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.style = .large
-        activityIndicator.startAnimating();
-        activityIndicator.center = (UIDevice.current.userInterfaceIdiom == .pad) ?  CGPoint(x: view.bounds.width / 5, y: view.bounds.height / 2) : CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
 
-        view.addSubview(activityIndicator)
+        activityIndicator = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50)) as UIActivityIndicatorView
+        activityIndicator?.hidesWhenStopped = true
+        activityIndicator?.style = .large
+        activityIndicator?.startAnimating();
+        activityIndicator?.center = (UIDevice.current.userInterfaceIdiom == .pad) ?  CGPoint(x: view.bounds.width / 5, y: view.bounds.height / 2) : CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
+
+        if let activityIndic = activityIndicator{
+            view.addSubview(activityIndic)
+
+        }
         
         setupTableView()
         getPosts()
@@ -43,9 +46,7 @@ class ReddiPostTableViewController: UITableViewController {
     }
     
     private func getPosts(){
-        
-        //TODO: should show loading
-        
+                
         redditService.getRedditPosts(completion: { [weak self] redditPosts, errorMessage in
                     guard let redditListing = redditPosts else {
                         //TODO: should show error view
@@ -53,14 +54,32 @@ class ReddiPostTableViewController: UITableViewController {
                         return
                     }
                     
-                    self?.activityIndicator.stopAnimating()
-                            
+                    self?.activityIndicator?.stopAnimating()
+                    self?.activityIndicator?.removeFromSuperview()
+
                     self?.redditListing = redditListing
                     self?.tableView.reloadData()
-                    self?.tableView.setContentOffset(CGPoint.zero, animated: false)
                     
                 })
     }
+    
+    @objc func dismissButtonTapped(_ sender: UIButton){
+        self.tableView.performBatchUpdates({
+            let indexPath = IndexPath(
+                item: sender.tag,
+                section: 0
+            )
+            
+            //TODO: this should be done with the server side in order to preserve app state and other front ends states
+            self.redditListing?.data.children.remove(at: sender.tag)
+            self.tableView.deleteRows(at: [indexPath], with: .left)
+            
+        }, completion: { _ in
+            self.tableView.reloadData()
+        })
+        
+    }
+    
     
     // MARK: - Table view data source
 
@@ -80,6 +99,9 @@ class ReddiPostTableViewController: UITableViewController {
             cell.titleLabel.text = redditPost.data.title
             cell.authorLabel.text = redditPost.data.author
             cell.numberOfCommentsLabel.text = String(redditPost.data.numberOfComments) + " comments"
+            
+            cell.dismissButton.tag = indexPath.row
+            cell.dismissButton.addTarget(self, action: #selector(dismissButtonTapped(_:)), for: .touchUpInside)
             
             if let imageUrl = redditPost.data.thumbnail, let url = URL(string: imageUrl){
                 let thumbnailService = ThumbnailService()
@@ -112,49 +134,4 @@ class ReddiPostTableViewController: UITableViewController {
         }
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
-    }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

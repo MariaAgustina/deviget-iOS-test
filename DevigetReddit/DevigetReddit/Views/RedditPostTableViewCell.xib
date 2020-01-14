@@ -64,9 +64,16 @@
                         <color key="textColor" systemColor="systemYellowColor" red="1" green="0.80000000000000004" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <nil key="highlightedColor"/>
                     </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z3e-Xl-7wc">
+                        <rect key="frame" x="16" y="164" width="109" height="30"/>
+                        <state key="normal" title="X Dissmiss Post">
+                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </state>
+                    </button>
                 </subviews>
                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 <constraints>
+                    <constraint firstItem="z3e-Xl-7wc" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="16" id="3fr-Jb-hWI"/>
                     <constraint firstAttribute="bottom" secondItem="lJO-OQ-YsC" secondAttribute="bottom" constant="44" id="7bQ-qX-o6E"/>
                     <constraint firstItem="TXE-U3-GNZ" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="22" id="E80-7M-Fkm"/>
                     <constraint firstAttribute="bottom" secondItem="txb-GQ-mig" secondAttribute="bottom" constant="11" id="GWr-7E-UJo"/>
@@ -77,6 +84,7 @@
                     <constraint firstItem="MCQ-Y4-R6j" firstAttribute="leading" relation="lessThanOrEqual" secondItem="TXE-U3-GNZ" secondAttribute="trailing" constant="202.5" id="p9V-DY-Yqf"/>
                     <constraint firstItem="MCQ-Y4-R6j" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="rM5-nf-Fuw"/>
                     <constraint firstItem="TXE-U3-GNZ" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="7" id="x4g-a7-dGZ"/>
+                    <constraint firstAttribute="bottom" secondItem="z3e-Xl-7wc" secondAttribute="bottom" constant="6" id="y7H-mA-BDq"/>
                     <constraint firstAttribute="trailing" secondItem="txb-GQ-mig" secondAttribute="trailing" constant="12" id="z2c-eI-DZG"/>
                 </constraints>
             </tableViewCellContentView>
@@ -84,6 +92,7 @@
             <connections>
                 <outlet property="authorLabel" destination="TXE-U3-GNZ" id="51L-d6-XRA"/>
                 <outlet property="dateLabel" destination="MCQ-Y4-R6j" id="eQU-6n-5ak"/>
+                <outlet property="dismissButton" destination="z3e-Xl-7wc" id="vea-R1-HoC"/>
                 <outlet property="numberOfCommentsLabel" destination="txb-GQ-mig" id="o11-qm-Bc3"/>
                 <outlet property="postImageView" destination="ioQ-v5-mjj" id="lgQ-un-JSM"/>
                 <outlet property="titleLabel" destination="1d7-Qh-BEV" id="YYW-ZB-Snl"/>
