@@ -10,13 +10,37 @@ import UIKit
 
 class ReddiPostTableViewController: UITableViewController {
 
+    
+    let redditService : RedditServiceProtocol = RedditService()
+    var redditListing : RedditListing?
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTableView()
+        getPosts()
     }
 
-    func setupTableView(){
-        tableView.register(UINib(nibName: "RedditPostTableViewCell", bundle: nil), forCellReuseIdentifier: "RedditPostCell")
+    private func setupTableView(){
+        tableView.register(UINib(nibName:"RedditPostTableViewCell", bundle: nil), forCellReuseIdentifier: "RedditPostCell")
+    }
+    
+    private func getPosts(){
+        
+        //TODO: should show loading
+        
+        redditService.getRedditPosts(completion: { [weak self] redditPosts, errorMessage in
+                    guard let redditListing = redditPosts else {
+                        //TODO: should show error view
+                        print(errorMessage ?? "There was an error with the reddit posts")
+                        return
+                    }
+                        
+                   self?.redditListing = redditListing
+                   self?.tableView.reloadData()
+                   self?.tableView.setContentOffset(CGPoint.zero, animated: false)
+                    
+                })
     }
     
     // MARK: - Table view data source
@@ -26,16 +50,18 @@ class ReddiPostTableViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO: posts.count
-        return 10
+        return self.redditListing?.data.children.count ?? 0
     }
 
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath)
-        return cell
+        if let cell : RedditPostTableViewCell = tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath) as? RedditPostTableViewCell, let redditPost =  self.redditListing?.data.children[indexPath.row]{
+            cell.titleLabel.text = redditPost.data.title
+            return cell
+        }
+       
+        return (tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath))
     }
 
     /*
