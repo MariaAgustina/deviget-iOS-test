@@ -37,7 +37,7 @@
             </objects>
             <point key="canvasLocation" x="502" y="119"/>
         </scene>
-        <!--Root View Controller-->
+        <!--Reddit Posts-->
         <scene sceneID="gr8-Fp-nl5">
             <objects>
                 <tableViewController clearsSelectionOnViewWillAppear="NO" id="0Ux-8m-8Oz" customClass="ReddiPostTableViewController" customModule="DevigetReddit" customModuleProvider="target" sceneMemberID="viewController">
@@ -60,7 +60,7 @@
                             <outlet property="delegate" destination="0Ux-8m-8Oz" id="uCA-ed-jWU"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Root View Controller" id="ttk-VW-5xi"/>
+                    <navigationItem key="navigationItem" title="Reddit Posts" id="ttk-VW-5xi"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e0d-9D-FTu" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
