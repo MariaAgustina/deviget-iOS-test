@@ -25,7 +25,7 @@ struct RedditPostData: Codable {
         case created = "created_utc"
         case author
         case thumbnail
-        case numberOfComments = "num_comemnts"
+        case numberOfComments = "num_comments"
     }
 }
 

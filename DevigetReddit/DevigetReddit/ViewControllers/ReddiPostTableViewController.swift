@@ -59,9 +59,18 @@ class ReddiPostTableViewController: UITableViewController {
         if let cell : RedditPostTableViewCell = tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath) as? RedditPostTableViewCell, let redditPost =  self.redditListing?.data.children[indexPath.row]{
             cell.titleLabel.text = redditPost.data.title
             cell.authorLabel.text = redditPost.data.author
+            
             if let comments = redditPost.data.numberOfComments{
-                cell.numberOfCommentsLabel.text = String(comments) + "comments"
+                cell.numberOfCommentsLabel.text = String(comments) + " comments"
             }
+            
+            if let imageUrl = redditPost.data.thumbnail, let url = URL(string: imageUrl){
+                let thumbnailService = ThumbnailService()
+                thumbnailService.downloadImage(url: url, completion:  { data in
+                    cell.postImageView.image = UIImage(data: data)
+                })
+            }
+            
             return cell
         }
        
