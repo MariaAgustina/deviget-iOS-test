@@ -18,7 +18,7 @@ public struct RedditPostData: Codable {
     let created : Int64
     let author : String
     let thumbnail : String?
-    let numberOfComments : Int?
+    let numberOfComments : Int
     
     enum CodingKeys: String, CodingKey {
         case title

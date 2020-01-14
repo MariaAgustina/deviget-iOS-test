@@ -14,16 +14,32 @@ class ReddiPostTableViewController: UITableViewController {
     let redditService : RedditServiceProtocol = RedditService()
     var redditListing : RedditListing?
     public weak var postSelectiondelegate: PostSelectionDelegate?
+    var activityIndicator = UIActivityIndicatorView()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let activityIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, width: 50, height: 50)) as UIActivityIndicatorView
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.style = .large
+        activityIndicator.startAnimating();
+        activityIndicator.center = (UIDevice.current.userInterfaceIdiom == .pad) ?  CGPoint(x: view.bounds.width / 5, y: view.bounds.height / 2) : CGPoint(x: view.bounds.width / 2, y: view.bounds.height / 2)
+
+        view.addSubview(activityIndicator)
+        
         setupTableView()
         getPosts()
     }
 
     private func setupTableView(){
         tableView.register(UINib(nibName:"RedditPostTableViewCell", bundle: nil), forCellReuseIdentifier: "RedditPostCell")
+        
+        tableView.separatorStyle = .singleLine
+        tableView.separatorColor = UIColor.gray
+        tableView.separatorInset = UIEdgeInsets(top: 0, left: 20, bottom: 0, right: 20)
+        
+
     }
     
     private func getPosts(){
@@ -36,10 +52,12 @@ class ReddiPostTableViewController: UITableViewController {
                         print(errorMessage ?? "There was an error with the reddit posts")
                         return
                     }
-                        
-                   self?.redditListing = redditListing
-                   self?.tableView.reloadData()
-                   self?.tableView.setContentOffset(CGPoint.zero, animated: false)
+                    
+                    self?.activityIndicator.stopAnimating()
+                            
+                    self?.redditListing = redditListing
+                    self?.tableView.reloadData()
+                    self?.tableView.setContentOffset(CGPoint.zero, animated: false)
                     
                 })
     }
@@ -58,12 +76,10 @@ class ReddiPostTableViewController: UITableViewController {
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         if let cell : RedditPostTableViewCell = tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath) as? RedditPostTableViewCell, let redditPost =  self.redditListing?.data.children[indexPath.row]{
+            
             cell.titleLabel.text = redditPost.data.title
             cell.authorLabel.text = redditPost.data.author
-            
-            if let comments = redditPost.data.numberOfComments{
-                cell.numberOfCommentsLabel.text = String(comments) + " comments"
-            }
+            cell.numberOfCommentsLabel.text = String(redditPost.data.numberOfComments) + " comments"
             
             if let imageUrl = redditPost.data.thumbnail, let url = URL(string: imageUrl){
                 let thumbnailService = ThumbnailService()

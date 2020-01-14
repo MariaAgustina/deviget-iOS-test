@@ -19,11 +19,12 @@ class RedditService: RedditServiceProtocol {
       func getRedditPosts(completion: @escaping RedditPosts) {
         dataTask?.cancel()
             
-        if var urlComponents = URLComponents(string: "https://ssl.reddit.com/r/subreddit/top.json") {
+        if var urlComponents = URLComponents(string: "https://ssl.reddit.com/r/popular/top.json") {
             //TODO: in real world, must not expose app token
             urlComponents.queryItems = [URLQueryItem(name: "client_id", value:  "tC2KILjYPSoxmw"),
                                         URLQueryItem(name: "response_type", value:  "code"),
                                         URLQueryItem(name: "state", value:  "TEST"),
+                                        URLQueryItem(name: "limit", value: "50"),
                                         URLQueryItem(name: "redirect_uri", value:  "redditapp://response"),
                                         URLQueryItem(name: "duration", value:  "permanent"),
                                         URLQueryItem(name: "scope", value:  "read")]

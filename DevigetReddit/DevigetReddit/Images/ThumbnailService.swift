@@ -15,12 +15,10 @@ class ThumbnailService: NSObject {
     }
     
     func downloadImage(url: URL, completion: @escaping (Data) -> Void) {
-        //TODO: borrar prints
-        print("Download Started")
+
         getData(from: url) { data, response, error in
             guard let data = data, error == nil else { return }
             print(response?.suggestedFilename ?? url.lastPathComponent)
-            print("Download Finished")
             DispatchQueue.main.async() {
                 completion(data)
             }
