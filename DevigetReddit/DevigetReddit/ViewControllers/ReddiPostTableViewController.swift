@@ -75,7 +75,7 @@ class ReddiPostTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        if let cell : RedditPostTableViewCell = tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath) as? RedditPostTableViewCell, let redditPost =  self.redditListing?.data.children[indexPath.row]{
+        if let cell : RedditPostTableViewCell = tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath) as? RedditPostTableViewCell, var redditPost =  self.redditListing?.data.children[indexPath.row]{
             
             cell.titleLabel.text = redditPost.data.title
             cell.authorLabel.text = redditPost.data.author
@@ -83,8 +83,12 @@ class ReddiPostTableViewController: UITableViewController {
             
             if let imageUrl = redditPost.data.thumbnail, let url = URL(string: imageUrl){
                 let thumbnailService = ThumbnailService()
-                thumbnailService.downloadImage(url: url, completion:  { data in
-                    cell.postImageView.image = UIImage(data: data)
+                thumbnailService.downloadImage(url: url, completion:  { [weak self] data in
+                    if let image : UIImage = UIImage(data: data){
+                        cell.postImageView.image = image
+                        redditPost.data.imageData = data
+                        self?.redditListing?.data.children[indexPath.row] = redditPost
+                    }
                 })
             }
             
@@ -94,11 +98,18 @@ class ReddiPostTableViewController: UITableViewController {
         return (tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath))
     }
 
+    // MARK: - Table view delegate
+
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let redditPost =  self.redditListing?.data.children[indexPath.row]{
+        
+        if let redditPost =  self.redditListing?.data.children[indexPath.row] {
             postSelectiondelegate?.postSelected(redditPost)
         }
 
+        
+        if let _ = self.redditListing?.data.children[indexPath.row].data.thumbnail, let detailViewController = postSelectiondelegate as? RedditPostDetailViewController, let detailNavigationController = detailViewController.navigationController {
+            splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
+        }
     }
     
     /*

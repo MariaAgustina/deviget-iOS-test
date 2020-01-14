@@ -7,6 +7,22 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Navigation Controller-->
+        <scene sceneID="Kic-5D-GaU">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bwd-0k-UMS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+                <navigationController id="nF9-88-Sn2" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="l1B-tP-5gT">
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="ae5-k3-Dfi" kind="relationship" relationship="rootViewController" id="Obb-7M-Xuf"/>
+                    </connections>
+                </navigationController>
+            </objects>
+            <point key="canvasLocation" x="501" y="116"/>
+        </scene>
         <!--Reddit Post Detail View Controller-->
         <scene sceneID="VYt-O0-J0W">
             <objects>
@@ -15,27 +31,39 @@
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQr-A0-4Wa">
-                                <rect key="frame" x="186" y="437.5" width="42" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="FYL-Lt-sLa">
+                                <rect key="frame" x="107" y="168" width="200" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="200" id="TBD-80-WnE"/>
+                                    <constraint firstAttribute="width" constant="200" id="qk9-ac-srL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VQr-A0-4Wa">
+                                <rect key="frame" x="30" y="388" width="354" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
-                            <constraint firstItem="VQr-A0-4Wa" firstAttribute="centerY" secondItem="5Xc-UZ-cF7" secondAttribute="centerY" id="pE7-Ew-hwJ"/>
-                            <constraint firstItem="VQr-A0-4Wa" firstAttribute="centerX" secondItem="5Xc-UZ-cF7" secondAttribute="centerX" id="tJx-BR-j7P"/>
+                            <constraint firstItem="ODk-y2-LbV" firstAttribute="trailing" secondItem="VQr-A0-4Wa" secondAttribute="trailing" constant="30" id="1Y9-JB-bLq"/>
+                            <constraint firstItem="VQr-A0-4Wa" firstAttribute="top" secondItem="FYL-Lt-sLa" secondAttribute="bottom" constant="20" id="42A-yi-M75"/>
+                            <constraint firstItem="FYL-Lt-sLa" firstAttribute="top" secondItem="ODk-y2-LbV" secondAttribute="top" constant="80" id="Afj-kP-FpB"/>
+                            <constraint firstItem="FYL-Lt-sLa" firstAttribute="centerX" secondItem="5Xc-UZ-cF7" secondAttribute="centerX" id="UOr-Kx-V6R"/>
+                            <constraint firstItem="VQr-A0-4Wa" firstAttribute="leading" secondItem="ODk-y2-LbV" secondAttribute="leading" constant="30" id="h7v-Gd-3sC"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="ODk-y2-LbV"/>
                     </view>
+                    <navigationItem key="navigationItem" id="ZDX-ck-jd1"/>
                     <connections>
                         <outlet property="descriptionLabel" destination="VQr-A0-4Wa" id="cLy-Af-Ewz"/>
+                        <outlet property="postImageView" destination="FYL-Lt-sLa" id="3fv-I9-V8d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="28Y-K3-YOW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="502" y="119"/>
+            <point key="canvasLocation" x="1422" y="116"/>
         </scene>
         <!--Reddit Posts-->
         <scene sceneID="gr8-Fp-nl5">
@@ -88,7 +116,7 @@
                 <splitViewController id="jWq-nh-aWX" sceneMemberID="viewController">
                     <connections>
                         <segue destination="mwa-9h-5n4" kind="relationship" relationship="masterViewController" id="u2v-uo-5L8"/>
-                        <segue destination="ae5-k3-Dfi" kind="relationship" relationship="detailViewController" id="ay4-aH-P7w"/>
+                        <segue destination="nF9-88-Sn2" kind="relationship" relationship="detailViewController" id="YrZ-V6-Bmg"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JPU-i4-Ocj" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>

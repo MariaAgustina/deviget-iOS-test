@@ -9,9 +9,9 @@
 import UIKit
 
 public struct RedditListing: Codable {
-    let data: RedditListingData
+    var data: RedditListingData
 }
 
 public struct RedditListingData: Codable {
-    let children: [RedditPost]
+    var children: [RedditPost]
 }

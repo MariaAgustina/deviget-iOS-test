@@ -9,7 +9,7 @@
 import UIKit
 
 public struct RedditPost: Codable {
-    let data: RedditPostData
+    var data: RedditPostData
     
 }
 
@@ -19,6 +19,7 @@ public struct RedditPostData: Codable {
     let author : String
     let thumbnail : String?
     let numberOfComments : Int
+    var imageData : Data?
     
     enum CodingKeys: String, CodingKey {
         case title
@@ -26,6 +27,7 @@ public struct RedditPostData: Codable {
         case author
         case thumbnail
         case numberOfComments = "num_comments"
+        case imageData
     }
 }
 

@@ -24,8 +24,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
           as? UINavigationController,
         let redditPostTableViewController = leftNavController.viewControllers.first
           as? ReddiPostTableViewController,
-        let redditPostDetailViewController = splitViewController.viewControllers.last
-          as? RedditPostDetailViewController
+        let redditPostDetailViewController = (splitViewController.viewControllers.last  as? UINavigationController)?.topViewController as? RedditPostDetailViewController
         else { fatalError() }
         redditPostTableViewController.postSelectiondelegate = redditPostDetailViewController
         
