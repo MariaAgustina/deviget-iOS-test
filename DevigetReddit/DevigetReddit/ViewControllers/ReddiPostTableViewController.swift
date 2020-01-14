@@ -58,6 +58,10 @@ class ReddiPostTableViewController: UITableViewController {
         
         if let cell : RedditPostTableViewCell = tableView.dequeueReusableCell(withIdentifier: "RedditPostCell", for: indexPath) as? RedditPostTableViewCell, let redditPost =  self.redditListing?.data.children[indexPath.row]{
             cell.titleLabel.text = redditPost.data.title
+            cell.authorLabel.text = redditPost.data.author
+            if let comments = redditPost.data.numberOfComments{
+                cell.numberOfCommentsLabel.text = String(comments) + "comments"
+            }
             return cell
         }
        

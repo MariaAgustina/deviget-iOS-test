@@ -11,10 +11,13 @@ import UIKit
 class RedditPostTableViewCell: UITableViewCell {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var authorLabel: UILabel!
+    @IBOutlet weak var dateLabel: UILabel!
+    @IBOutlet weak var numberOfCommentsLabel: UILabel!
+    @IBOutlet weak var postImageView: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        titleLabel.text = "Hello, title cell"
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

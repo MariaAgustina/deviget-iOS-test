@@ -16,5 +16,16 @@ struct RedditPost: Codable {
 struct RedditPostData: Codable {
     let title: String
     let created : Int64
+    let author : String
+    let thumbnail : String?
+    let numberOfComments : Int?
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case created = "created_utc"
+        case author
+        case thumbnail
+        case numberOfComments = "num_comemnts"
+    }
 }
 
