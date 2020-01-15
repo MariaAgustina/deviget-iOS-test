@@ -99,9 +99,11 @@ class ReddiPostTableViewController: UITableViewController {
             cell.titleLabel.text = redditPost.data.title
             cell.authorLabel.text = redditPost.data.author
             cell.numberOfCommentsLabel.text = String(redditPost.data.numberOfComments) + " comments"
+            cell.visitedImageView.isHidden = redditPost.data.visited
             
             cell.dismissButton.tag = indexPath.row
             cell.dismissButton.addTarget(self, action: #selector(dismissButtonTapped(_:)), for: .touchUpInside)
+            
             
             if let imageUrl = redditPost.data.thumbnail, let url = URL(string: imageUrl){
                 let thumbnailService = ThumbnailService()
@@ -124,14 +126,16 @@ class ReddiPostTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        if let redditPost =  self.redditListing?.data.children[indexPath.row] {
+        if var redditPost =  self.redditListing?.data.children[indexPath.row] {
+            redditPost.data.visited = true
+            self.redditListing?.data.children[indexPath.row] = redditPost
             postSelectiondelegate?.postSelected(redditPost)
         }
-
         
         if let _ = self.redditListing?.data.children[indexPath.row].data.thumbnail, let detailViewController = postSelectiondelegate as? RedditPostDetailViewController, let detailNavigationController = detailViewController.navigationController {
             splitViewController?.showDetailViewController(detailNavigationController, sender: nil)
         }
+        
+        self.tableView.reloadData()
     }
-    
 }

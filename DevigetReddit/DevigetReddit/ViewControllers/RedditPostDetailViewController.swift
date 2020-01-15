@@ -28,6 +28,8 @@ extension RedditPostDetailViewController: PostSelectionDelegate {
             postImageView.image = UIImage(data: data)
 
         }
+        
+        //TODO: should do PUT task to inform server side that the POST was visited
     }
     
 }

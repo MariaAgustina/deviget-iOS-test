@@ -20,6 +20,7 @@ public struct RedditPostData: Codable {
     let thumbnail : String?
     let numberOfComments : Int
     var imageData : Data?
+    var visited : Bool
     
     enum CodingKeys: String, CodingKey {
         case title
@@ -28,6 +29,7 @@ public struct RedditPostData: Codable {
         case thumbnail
         case numberOfComments = "num_comments"
         case imageData
+        case visited
     }
 }
 
