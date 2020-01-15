@@ -4,12 +4,13 @@
 
 This project runs on Xcode 11.
 
-##Architecture
+## Architecture
 
 - This project was based on the model view controller design pattern
 - I used a native UISplitViewController provided by apple and customized it according to the needs of the project
 
 ## MVP
+
 Some features were left out because I preferred to obtain a minimum viable product that works well and robust.
 The features that were left out are:
 
