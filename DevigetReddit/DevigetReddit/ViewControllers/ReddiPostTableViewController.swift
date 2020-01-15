@@ -100,6 +100,7 @@ class ReddiPostTableViewController: UITableViewController {
             cell.authorLabel.text = redditPost.data.author
             cell.numberOfCommentsLabel.text = String(redditPost.data.numberOfComments) + " comments"
             cell.visitedImageView.isHidden = redditPost.data.visited
+            cell.createdAtLabel.text = (TimeFormatter().getStringFormat(from: redditPost.data.created) ?? "") + " hours ago"
             
             cell.dismissButton.tag = indexPath.row
             cell.dismissButton.addTarget(self, action: #selector(dismissButtonTapped(_:)), for: .touchUpInside)

@@ -19,6 +19,8 @@ class RedditPostTableViewCell: UITableViewCell {
     
     @IBOutlet weak var visitedImageView: UIImageView!
     
+    @IBOutlet weak var createdAtLabel: UILabel!
+    
     override func awakeFromNib() {
         super.awakeFromNib()
     }
